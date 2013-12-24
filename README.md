@@ -26,7 +26,8 @@ you want it to set the background of a particular monitor, pass the `-m`
 flag with the integer value representing the monitor you want to set.
 This is based on the order in which your desktops are configured in OSX.
 Passing 1 will set your primary monitor, 2 your secondary monitor, and
-so forth.
+so forth. You can set the desktop on all available monitors with the
+`-a` flag.
 
 # Credits
 

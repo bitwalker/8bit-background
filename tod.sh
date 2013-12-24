@@ -1,7 +1,7 @@
 #!/bin/bash
 
 MONITOR=
-while getopts "m:" OPTION
+while getopts "m:a" OPTION
 do
   case $OPTION in
     m)
@@ -14,8 +14,11 @@ do
       # If valid, continue
       MONITOR=$OPTARG
       ;;
+    a)
+      MONITOR=-1
+      ;;
     ?)
-      echo "Invalid arguments passed to script. Only -m is allowed."
+      echo "Invalid arguments passed to script. Only -m or -a are allowed."
       exit
       ;;
   esac
@@ -31,17 +34,18 @@ DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
 # This function will execute some AppleScript to set the background
 function setbg {
-  #osascript -e "
-    #tell application \"Finder\"
-      #set desktop picture to (POSIX file \"$DIR/$1\") as alias
-    #end tell
-  #"
   osascript -e "
     tell application \"System Events\"
       set allDesktops to a reference to every desktop
       set numDesktops to count of allDesktops
-      if $MONITOR <= numDesktops then
-        set picture of (item $MONITOR of allDesktops) to file (POSIX file \"$DIR/$1\") as alias
+      if $MONITOR equals -1 then
+        repeat with x from 1 to numDesktops
+          set picture of (item x of allDesktops) to file (POSIX file \"$DIR/$1\") as alias
+        end repeat
+      else
+        if $MONITOR <= numDesktops then
+          set picture of (item $MONITOR of allDesktops) to file (POSIX file \"$DIR/$1\") as alias
+        end if
       end if
     end tell
   "
