@@ -15,7 +15,6 @@ crontab on OSX for some reason, hence the `EDITOR=nano`.
 
 ```
 0 * * * * /Users/Paul/Repositories/8bit-background/tod.sh
-
 ```
 
 This will schedule the script to run once an hour.
