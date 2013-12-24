@@ -39,7 +39,10 @@ function setbg {
   osascript -e "
     tell application \"System Events\"
       set allDesktops to a reference to every desktop
-      set picture of (item $MONITOR of allDesktops) to file (POSIX file \"$DIR/$1\") as alias
+      set numDesktops to count of allDesktops
+      if $MONITOR <= numDesktops then
+        set picture of (item $MONITOR of allDesktops) to file (POSIX file \"$DIR/$1\") as alias
+      end if
     end tell
   "
 }
