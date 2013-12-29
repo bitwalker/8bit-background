@@ -96,8 +96,7 @@ hour=`date +%H`
 
 # Loop over every timing, if the current hour is greater than or equal
 # to the timing value, set the background to the corresponding image
-for i in {7..0..-1}
-do
+for i in {7..0}; do
   if [ $hour -ge ${timing[i]} ]; then
     # Set the background to the appropriate image
     setbg ${files[i]}
