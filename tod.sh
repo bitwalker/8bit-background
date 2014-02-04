@@ -42,8 +42,7 @@ resolutions=(
 # This function will execute some AppleScript to set the background
 function setbg {
   if [ $MONITOR -eq -1 ]; then
-    for i in {0..$NUM_MONITORS}
-    do
+    for i in $(seq 0 $NUM_MONITORS); do
       RES=${resolutions[i]}
       CURRENT_DESKTOP=$((i+1))
       osascript -e "
