@@ -43,6 +43,9 @@ resolutions=(
 function setbg {
   if [ $MONITOR -eq -1 ]; then
     for i in $(seq 0 $NUM_MONITORS); do
+      if [ $i = $NUM_MONITORS ]; then 
+        break
+      fi
       RES=${resolutions[i]}
       CURRENT_DESKTOP=$((i+1))
       osascript -e "
